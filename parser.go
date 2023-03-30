@@ -7,13 +7,11 @@ import __yyfmt__ "fmt"
 
 //line parser.y:2
 
-import "fmt"
-
 type ent struct {
 	name string
 }
 
-//line parser.y:12
+//line parser.y:10
 type yySymType struct {
 	yys int
 	ent ent
@@ -427,16 +425,14 @@ yydefault:
 
 	case 1:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:25
+//line parser.y:23
 		{
-			fmt.Println("11111")
 			yylex.(*Lex).result = yyDollar[1].ent
 		}
 	case 2:
 		yyDollar = yyS[yypt-2 : yypt+1]
-//line parser.y:31
+//line parser.y:28
 		{
-			fmt.Println("22222")
 			yyVAL.ent = ent{name: yyDollar[2].val}
 		}
 	}

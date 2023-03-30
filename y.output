@@ -18,7 +18,7 @@ state 1
 state 2
 	main:  ent.    (1)
 
-	.  reduce 1 (src line 24)
+	.  reduce 1 (src line 22)
 
 
 state 3
@@ -31,7 +31,7 @@ state 3
 state 4
 	ent:  EN_TOK IDENT.    (2)
 
-	.  reduce 2 (src line 30)
+	.  reduce 2 (src line 27)
 
 
 5 terminals, 3 nonterminals

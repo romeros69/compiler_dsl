@@ -1,8 +1,6 @@
 %{
 package main
 
-import "fmt"
-
 type ent struct {
   name string
 }
@@ -23,12 +21,10 @@ type ent struct {
 
 main: ent
   {
-    fmt.Println("11111")
     yylex.(*Lex).result = $1
   }
 
 ent: EN_TOK IDENT
   {
-    fmt.Println("22222")
     $$ = ent{name: $2}
   }
