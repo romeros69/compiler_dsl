@@ -5,7 +5,7 @@ lex:
 	golex -o lexer.go lexer.l
 
 yacc:
-	goyacc -o parser.go pasrser.y
+	goyacc -o parser.go parser.y
 
 clear:
 	rm compiler_dsl

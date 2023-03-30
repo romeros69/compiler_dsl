@@ -5,5 +5,5 @@ import "fmt"
 func main() {
 	l := NewLex([]byte("entity popa"))
 	_ = yyParse(l)
-	fmt.Println(l.result)
+	fmt.Printf("ast: %v\n", l.result)
 }
