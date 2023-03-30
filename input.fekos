@@ -1,3 +1,5 @@
 entity roma {
-    name int
+    name string
+    age int
+    type string
 }
