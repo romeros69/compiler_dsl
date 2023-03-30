@@ -1,4 +1,6 @@
-run:
+run: lex yacc gogo
+
+gogo:
 	go build && ./compiler_dsl
 
 lex:

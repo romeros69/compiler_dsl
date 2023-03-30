@@ -7,19 +7,36 @@ import __yyfmt__ "fmt"
 
 //line parser.y:2
 
-type ent struct {
-	name string
+const (
+	INT = iota
+	STRING
+)
+
+type field struct {
+	tokType int
+	name    string
 }
 
-//line parser.y:10
+type ent struct {
+	name  string
+	field field
+}
+
+//line parser.y:21
 type yySymType struct {
-	yys int
-	ent ent
-	val string
+	yys     int
+	ent     ent
+	field   field
+	val     string
+	tokType int
 }
 
 const IDENT = 57346
 const EN_TOK = 57347
+const INT_T_TOK = 57348
+const STRING_T_TOK = 57349
+const LS = 57350
+const RS = 57351
 
 var yyToknames = [...]string{
 	"$end",
@@ -27,6 +44,10 @@ var yyToknames = [...]string{
 	"$unk",
 	"IDENT",
 	"EN_TOK",
+	"INT_T_TOK",
+	"STRING_T_TOK",
+	"LS",
+	"RS",
 }
 
 var yyStatenames = [...]string{}
@@ -44,34 +65,38 @@ var yyExca = [...]int8{
 
 const yyPrivate = 57344
 
-const yyLast = 4
+const yyLast = 11
 
 var yyAct = [...]int8{
-	3, 4, 1, 2,
+	8, 10, 11, 3, 5, 7, 4, 1, 9, 6,
+	2,
 }
 
 var yyPact = [...]int16{
-	-5, -1000, -1000, -3, -1000,
+	-2, -1000, -1000, 2, -4, 1, -9, -5, -1000, -1000,
+	-1000, -1000,
 }
 
 var yyPgo = [...]int8{
-	0, 3, 2,
+	0, 10, 9, 8, 7,
 }
 
 var yyR1 = [...]int8{
-	0, 2, 1,
+	0, 4, 1, 2, 3, 3,
 }
 
 var yyR2 = [...]int8{
-	0, 1, 2,
+	0, 1, 5, 2, 1, 1,
 }
 
 var yyChk = [...]int16{
-	-1000, -2, -1, 5, 4,
+	-1000, -4, -1, 5, 4, 8, -2, 4, 9, -3,
+	6, 7,
 }
 
 var yyDef = [...]int8{
-	0, -2, 1, 0, 2,
+	0, -2, 1, 0, 0, 0, 0, 0, 2, 3,
+	4, 5,
 }
 
 var yyTok1 = [...]int8{
@@ -79,7 +104,7 @@ var yyTok1 = [...]int8{
 }
 
 var yyTok2 = [...]int8{
-	2, 3, 4, 5,
+	2, 3, 4, 5, 6, 7, 8, 9,
 }
 
 var yyTok3 = [...]int8{
@@ -425,15 +450,33 @@ yydefault:
 
 	case 1:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:23
+//line parser.y:38
 		{
 			yylex.(*Lex).result = yyDollar[1].ent
 		}
 	case 2:
-		yyDollar = yyS[yypt-2 : yypt+1]
-//line parser.y:28
+		yyDollar = yyS[yypt-5 : yypt+1]
+//line parser.y:43
 		{
-			yyVAL.ent = ent{name: yyDollar[2].val}
+			yyVAL.ent = ent{name: yyDollar[2].val, field: yyDollar[4].field}
+		}
+	case 3:
+		yyDollar = yyS[yypt-2 : yypt+1]
+//line parser.y:48
+		{
+			yyVAL.field = field{name: yyDollar[1].val, tokType: yyDollar[2].tokType}
+		}
+	case 4:
+		yyDollar = yyS[yypt-1 : yypt+1]
+//line parser.y:52
+		{
+			yyVAL.tokType = INT
+		}
+	case 5:
+		yyDollar = yyS[yypt-1 : yypt+1]
+//line parser.y:53
+		{
+			yyVAL.tokType = STRING
 		}
 	}
 	goto yystack /* stack new state and value */

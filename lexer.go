@@ -5,6 +5,7 @@ package main
 import (
 	"bytes"
 	"errors"
+	"fmt"
 	"log"
 )
 
@@ -61,7 +62,7 @@ yystate1:
 yystart1:
 	switch {
 	default:
-		goto yystate3 // c >= '\x01' && c <= '\b' || c == '\v' || c == '\f' || c >= '\x0e' && c <= '\x1f' || c >= '!' && c <= '@' || c >= '[' && c <= '`' || c >= '{' && c <= 'ÿ'
+		goto yystate3 // c >= '\x01' && c <= '\b' || c == '\v' || c == '\f' || c >= '\x0e' && c <= '\x1f' || c >= '!' && c <= '@' || c >= '[' && c <= '`' || c == '|' || c >= '~' && c <= 'ÿ'
 	case c == '\n':
 		goto yystate5
 	case c == '\t' || c == '\r' || c == ' ':
@@ -70,19 +71,25 @@ yystart1:
 		goto yystate2
 	case c == 'e':
 		goto yystate8
-	case c == 's':
+	case c == 'i':
 		goto yystate14
-	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'd' || c >= 'f' && c <= 'r' || c >= 't' && c <= 'z':
+	case c == 's':
+		goto yystate17
+	case c == '{':
+		goto yystate24
+	case c == '}':
+		goto yystate25
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'd' || c >= 'f' && c <= 'h' || c >= 'j' && c <= 'r' || c >= 't' && c <= 'z':
 		goto yystate6
 	}
 
 yystate2:
 	c = l.Next()
-	goto yyrule4
+	goto yyrule8
 
 yystate3:
 	c = l.Next()
-	goto yyrule5
+	goto yyrule9
 
 yystate4:
 	c = l.Next()
@@ -106,7 +113,7 @@ yystate6:
 	c = l.Next()
 	switch {
 	default:
-		goto yyrule3
+		goto yyrule7
 	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z':
 		goto yystate7
 	}
@@ -115,7 +122,7 @@ yystate7:
 	c = l.Next()
 	switch {
 	default:
-		goto yyrule3
+		goto yyrule7
 	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z':
 		goto yystate7
 	}
@@ -124,7 +131,7 @@ yystate8:
 	c = l.Next()
 	switch {
 	default:
-		goto yyrule3
+		goto yyrule7
 	case c == 'n':
 		goto yystate9
 	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'm' || c >= 'o' && c <= 'z':
@@ -135,7 +142,7 @@ yystate9:
 	c = l.Next()
 	switch {
 	default:
-		goto yyrule3
+		goto yyrule7
 	case c == 't':
 		goto yystate10
 	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 's' || c >= 'u' && c <= 'z':
@@ -146,7 +153,7 @@ yystate10:
 	c = l.Next()
 	switch {
 	default:
-		goto yyrule3
+		goto yyrule7
 	case c == 'i':
 		goto yystate11
 	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'h' || c >= 'j' && c <= 'z':
@@ -157,7 +164,7 @@ yystate11:
 	c = l.Next()
 	switch {
 	default:
-		goto yyrule3
+		goto yyrule7
 	case c == 't':
 		goto yystate12
 	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 's' || c >= 'u' && c <= 'z':
@@ -168,7 +175,7 @@ yystate12:
 	c = l.Next()
 	switch {
 	default:
-		goto yyrule3
+		goto yyrule7
 	case c == 'y':
 		goto yystate13
 	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'x' || c == 'z':
@@ -179,7 +186,7 @@ yystate13:
 	c = l.Next()
 	switch {
 	default:
-		goto yyrule2
+		goto yyrule6
 	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z':
 		goto yystate7
 	}
@@ -188,12 +195,10 @@ yystate14:
 	c = l.Next()
 	switch {
 	default:
-		goto yyrule1
-	case c == '\t' || c == '\n' || c == '\r' || c == ' ':
-		goto yystate5
-	case c == 's':
+		goto yyrule7
+	case c == 'n':
 		goto yystate15
-	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'r' || c >= 't' && c <= 'z':
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'm' || c >= 'o' && c <= 'z':
 		goto yystate7
 	}
 
@@ -201,28 +206,152 @@ yystate15:
 	c = l.Next()
 	switch {
 	default:
+		goto yyrule7
+	case c == 't':
+		goto yystate16
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 's' || c >= 'u' && c <= 'z':
+		goto yystate7
+	}
+
+yystate16:
+	c = l.Next()
+	switch {
+	default:
+		goto yyrule4
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z':
+		goto yystate7
+	}
+
+yystate17:
+	c = l.Next()
+	switch {
+	default:
 		goto yyrule1
 	case c == '\t' || c == '\n' || c == '\r' || c == ' ':
 		goto yystate5
 	case c == 's':
-		goto yystate15
+		goto yystate18
+	case c == 't':
+		goto yystate19
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'r' || c >= 'u' && c <= 'z':
+		goto yystate7
+	}
+
+yystate18:
+	c = l.Next()
+	switch {
+	default:
+		goto yyrule1
+	case c == '\t' || c == '\n' || c == '\r' || c == ' ':
+		goto yystate5
+	case c == 's':
+		goto yystate18
 	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'r' || c >= 't' && c <= 'z':
 		goto yystate7
 	}
 
+yystate19:
+	c = l.Next()
+	switch {
+	default:
+		goto yyrule7
+	case c == 'r':
+		goto yystate20
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'q' || c >= 's' && c <= 'z':
+		goto yystate7
+	}
+
+yystate20:
+	c = l.Next()
+	switch {
+	default:
+		goto yyrule7
+	case c == 'i':
+		goto yystate21
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'h' || c >= 'j' && c <= 'z':
+		goto yystate7
+	}
+
+yystate21:
+	c = l.Next()
+	switch {
+	default:
+		goto yyrule7
+	case c == 'n':
+		goto yystate22
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'm' || c >= 'o' && c <= 'z':
+		goto yystate7
+	}
+
+yystate22:
+	c = l.Next()
+	switch {
+	default:
+		goto yyrule7
+	case c == 'g':
+		goto yystate23
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'f' || c >= 'h' && c <= 'z':
+		goto yystate7
+	}
+
+yystate23:
+	c = l.Next()
+	switch {
+	default:
+		goto yyrule5
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z':
+		goto yystate7
+	}
+
+yystate24:
+	c = l.Next()
+	goto yyrule2
+
+yystate25:
+	c = l.Next()
+	goto yyrule3
+
 yyrule1: // {C}
 	{
-		// Ignore whitespace
+		// continue
 		goto yystate0
 	}
-yyrule2: // {E}
+yyrule2: // {LS}
+	{
+		{
+			return LS
+		}
+		goto yystate0
+	}
+yyrule3: // {RS}
+	{
+		{
+			return RS
+		}
+		goto yystate0
+	}
+yyrule4: // {INT}
+	{
+		{
+			return INT_T_TOK
+		}
+		goto yystate0
+	}
+yyrule5: // {STRING}
+	{
+		{
+			return STRING_T_TOK
+		}
+		goto yystate0
+	}
+yyrule6: // {E}
 	{
 		{
 			return EN_TOK
 		}
 		goto yystate0
 	}
-yyrule3: // {S}
+yyrule7: // {S}
 	{
 		{
 			lval.val = buf.String()
@@ -230,16 +359,17 @@ yyrule3: // {S}
 		}
 		goto yystate0
 	}
-yyrule4: // \0
+yyrule8: // \0
 	{
 		{
 			return -1
 		} // Exit on EOF or any other error
 		goto yystate0
 	}
-yyrule5: // .
+yyrule9: // .
 	if true { // avoid go vet determining the below panic will not be reached
 		{
+			fmt.Printf("ERROR 2: %s, buf: %s\n", string(c), buf)
 			return -1
 		}
 		goto yystate0
@@ -260,6 +390,7 @@ yyabort: // no lexem recognized
 		}
 	}
 
+	fmt.Println("ERROR 3")
 	log.Fatal("scanner internal error")
 	return 0
 }

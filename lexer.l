@@ -5,6 +5,7 @@ import (
     "log"
     "bytes"
     "errors"
+    "fmt"
 )
 
 type Lex struct {
@@ -53,18 +54,28 @@ func (l *Lex) Lex(lval *yySymType) int {
 %yyc c
 %yyn c = l.Next()
 
-S   [a-zA-Z]+
-E   entity
-C   [ \s\t\n\r]+
+S       [a-zA-Z]+
+E       entity
+INT     int
+STRING  string
+C       [ \s\t\n\r]+
+LS      "{"
+RS      "}"
 
 %%
     buf.Reset()
 
-{C}                 // Ignore whitespace
+{C}                 // continue
 
-{E}                 {
-                        return EN_TOK
-                    }
+{LS}                {return LS}
+
+{RS}                {return RS}
+
+{INT}               {return INT_T_TOK}
+
+{STRING}            {return STRING_T_TOK}
+
+{E}                 {return EN_TOK}
 
 {S}                 {
                         lval.val = buf.String()
@@ -73,9 +84,10 @@ C   [ \s\t\n\r]+
 
 \0                  {return -1} // Exit on EOF or any other error
 
-.                   {return -1}
+.                   {fmt.Printf("ERROR 2: %s, buf: %s\n", string(c), buf); return -1}
 
 %%
+    fmt.Println("ERROR 3")
     log.Fatal("scanner internal error")
     return 0
 }

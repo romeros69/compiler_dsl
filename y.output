@@ -18,31 +18,80 @@ state 1
 state 2
 	main:  ent.    (1)
 
-	.  reduce 1 (src line 22)
+	.  reduce 1 (src line 37)
 
 
 state 3
-	ent:  EN_TOK.IDENT 
+	ent:  EN_TOK.IDENT LS field RS 
 
 	IDENT  shift 4
 	.  error
 
 
 state 4
-	ent:  EN_TOK IDENT.    (2)
+	ent:  EN_TOK IDENT.LS field RS 
 
-	.  reduce 2 (src line 27)
+	LS  shift 5
+	.  error
 
 
-5 terminals, 3 nonterminals
-3 grammar rules, 5/16000 states
+state 5
+	ent:  EN_TOK IDENT LS.field RS 
+
+	IDENT  shift 7
+	.  error
+
+	field  goto 6
+
+state 6
+	ent:  EN_TOK IDENT LS field.RS 
+
+	RS  shift 8
+	.  error
+
+
+state 7
+	field:  IDENT.type 
+
+	INT_T_TOK  shift 10
+	STRING_T_TOK  shift 11
+	.  error
+
+	type  goto 9
+
+state 8
+	ent:  EN_TOK IDENT LS field RS.    (2)
+
+	.  reduce 2 (src line 42)
+
+
+state 9
+	field:  IDENT type.    (3)
+
+	.  reduce 3 (src line 47)
+
+
+state 10
+	type:  INT_T_TOK.    (4)
+
+	.  reduce 4 (src line 51)
+
+
+state 11
+	type:  STRING_T_TOK.    (5)
+
+	.  reduce 5 (src line 53)
+
+
+9 terminals, 5 nonterminals
+6 grammar rules, 12/16000 states
 0 shift/reduce, 0 reduce/reduce conflicts reported
-52 working sets used
-memory: parser 1/240000
+54 working sets used
+memory: parser 3/240000
 0 extra closures
-2 shift entries, 1 exceptions
-2 goto entries
+7 shift entries, 1 exceptions
+4 goto entries
 0 entries saved by goto default
-Optimizer space used: output 4/240000
-4 table entries, 0 zero
-maximum spread: 5, maximum offset: 5
+Optimizer space used: output 11/240000
+11 table entries, 0 zero
+maximum spread: 9, maximum offset: 9
