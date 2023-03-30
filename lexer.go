@@ -5,7 +5,6 @@ package main
 import (
 	"bytes"
 	"errors"
-	"fmt"
 	"log"
 )
 
@@ -53,8 +52,7 @@ func (l *Lex) Lex(lval *yySymType) int {
 
 yystate0:
 
-	fmt.Printf("current buf: %s\n", buf.String())
-	buf.Reset() // Code before the first rule is executed before every scan cycle (state 0 action)
+	buf.Reset()
 
 	goto yystart1
 
@@ -212,7 +210,7 @@ yystate15:
 		goto yystate7
 	}
 
-yyrule1: // [ \s\t\n\r]+
+yyrule1: // {C}
 	{
 		// Ignore whitespace
 		goto yystate0
@@ -220,7 +218,6 @@ yyrule1: // [ \s\t\n\r]+
 yyrule2: // {E}
 	{
 		{
-			fmt.Printf("buf when E: %s\n", buf.String())
 			return EN_TOK
 		}
 		goto yystate0
@@ -265,5 +262,4 @@ yyabort: // no lexem recognized
 
 	log.Fatal("scanner internal error")
 	return 0
-
-} // *1 this right brace
+}

@@ -5,7 +5,6 @@ import (
     "log"
     "bytes"
     "errors"
-    "fmt"
 )
 
 type Lex struct {
@@ -56,15 +55,14 @@ func (l *Lex) Lex(lval *yySymType) int {
 
 S   [a-zA-Z]+
 E   entity
+C   [ \s\t\n\r]+
 
 %%
-    fmt.Printf("current buf: %s\n", buf.String())
-    buf.Reset()  // Code before the first rule is executed before every scan cycle (state 0 action)
+    buf.Reset()
 
-[ \s\t\n\r]+          // Ignore whitespace
+{C}                 // Ignore whitespace
 
 {E}                 {
-                        fmt.Printf("buf when E: %s\n", buf.String())
                         return EN_TOK
                     }
 
@@ -80,5 +78,4 @@ E   entity
 %%
     log.Fatal("scanner internal error")
     return 0
-
-} // *1 this right brace
+}
