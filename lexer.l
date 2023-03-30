@@ -5,6 +5,7 @@ import (
     "log"
     "bytes"
     "errors"
+    "fmt"
 )
 
 type Lex struct {
@@ -22,10 +23,15 @@ func NewLex(input []byte) *Lex {
 
 func (l *Lex) Next() byte {
     if l.pos >= len(l.input) || l.pos == -1 {
+        if l.pos == len(l.input) {
+            buf.WriteByte(l.input[l.pos - 1])
+        }
         l.pos = -1
         return 0
     }
-    buf.WriteByte(l.input[l.pos])
+    if l.pos != 0 {
+        buf.WriteByte(l.input[l.pos - 1])
+    }
     l.pos++
     return l.input[l.pos - 1]
 }
@@ -48,17 +54,24 @@ func (l *Lex) Lex(lval *yySymType) int {
 %yyc c
 %yyn c = l.Next()
 
-S   ^[_a-zA-Z][_a-zA-Z0-9]*
-E entity
+S   [a-zA-Z]+
+E   entity
 
 %%
+    fmt.Printf("current buf: %s\n", buf.String())
     buf.Reset()  // Code before the first rule is executed before every scan cycle (state 0 action)
 
-[ \t\n\r]+          // Ignore whitespace
+[ \s\t\n\r]+          // Ignore whitespace
 
-{E}                 {return EN_TOK}
+{E}                 {
+                        fmt.Printf("buf when E: %s\n", buf.String())
+                        return EN_TOK
+                    }
 
-{S}                 {lval.val = buf.String(); return IDENT}
+{S}                 {
+                        lval.val = buf.String()
+                        return IDENT
+                    }
 
 \0                  {return -1} // Exit on EOF or any other error
 

@@ -5,6 +5,7 @@ package main
 import (
 	"bytes"
 	"errors"
+	"fmt"
 	"log"
 )
 
@@ -23,10 +24,15 @@ func NewLex(input []byte) *Lex {
 
 func (l *Lex) Next() byte {
 	if l.pos >= len(l.input) || l.pos == -1 {
+		if l.pos == len(l.input) {
+			buf.WriteByte(l.input[l.pos-1])
+		}
 		l.pos = -1
 		return 0
 	}
-	buf.WriteByte(l.input[l.pos])
+	if l.pos != 0 {
+		buf.WriteByte(l.input[l.pos-1])
+	}
 	l.pos++
 	return l.input[l.pos-1]
 }
@@ -47,6 +53,7 @@ func (l *Lex) Lex(lval *yySymType) int {
 
 yystate0:
 
+	fmt.Printf("current buf: %s\n", buf.String())
 	buf.Reset() // Code before the first rule is executed before every scan cycle (state 0 action)
 
 	goto yystart1
@@ -56,7 +63,7 @@ yystate1:
 yystart1:
 	switch {
 	default:
-		goto yystate3 // c >= '\x01' && c <= '\b' || c == '\v' || c == '\f' || c >= '\x0e' && c <= '\x1f' || c >= '!' && c <= '@' || c >= '[' && c <= '^' || c == '`' || c >= '{' && c <= 'ÿ'
+		goto yystate3 // c >= '\x01' && c <= '\b' || c == '\v' || c == '\f' || c >= '\x0e' && c <= '\x1f' || c >= '!' && c <= '@' || c >= '[' && c <= '`' || c >= '{' && c <= 'ÿ'
 	case c == '\n':
 		goto yystate5
 	case c == '\t' || c == '\r' || c == ' ':
@@ -65,7 +72,9 @@ yystart1:
 		goto yystate2
 	case c == 'e':
 		goto yystate8
-	case c >= 'A' && c <= 'Z' || c == '_' || c >= 'a' && c <= 'd' || c >= 'f' && c <= 'z':
+	case c == 's':
+		goto yystate14
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'd' || c >= 'f' && c <= 'r' || c >= 't' && c <= 'z':
 		goto yystate6
 	}
 
@@ -82,7 +91,7 @@ yystate4:
 	switch {
 	default:
 		goto yyrule1
-	case c == '\t' || c == '\n' || c == '\r' || c == ' ':
+	case c == '\t' || c == '\n' || c == '\r' || c == ' ' || c == 's':
 		goto yystate5
 	}
 
@@ -91,7 +100,7 @@ yystate5:
 	switch {
 	default:
 		goto yyrule1
-	case c == '\t' || c == '\n' || c == '\r' || c == ' ':
+	case c == '\t' || c == '\n' || c == '\r' || c == ' ' || c == 's':
 		goto yystate5
 	}
 
@@ -100,7 +109,7 @@ yystate6:
 	switch {
 	default:
 		goto yyrule3
-	case c >= '0' && c <= '9' || c >= 'A' && c <= 'Z' || c == '_' || c >= 'a' && c <= 'z':
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z':
 		goto yystate7
 	}
 
@@ -109,7 +118,7 @@ yystate7:
 	switch {
 	default:
 		goto yyrule3
-	case c >= '0' && c <= '9' || c >= 'A' && c <= 'Z' || c == '_' || c >= 'a' && c <= 'z':
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z':
 		goto yystate7
 	}
 
@@ -120,7 +129,7 @@ yystate8:
 		goto yyrule3
 	case c == 'n':
 		goto yystate9
-	case c >= '0' && c <= '9' || c >= 'A' && c <= 'Z' || c == '_' || c >= 'a' && c <= 'm' || c >= 'o' && c <= 'z':
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'm' || c >= 'o' && c <= 'z':
 		goto yystate7
 	}
 
@@ -131,7 +140,7 @@ yystate9:
 		goto yyrule3
 	case c == 't':
 		goto yystate10
-	case c >= '0' && c <= '9' || c >= 'A' && c <= 'Z' || c == '_' || c >= 'a' && c <= 's' || c >= 'u' && c <= 'z':
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 's' || c >= 'u' && c <= 'z':
 		goto yystate7
 	}
 
@@ -142,7 +151,7 @@ yystate10:
 		goto yyrule3
 	case c == 'i':
 		goto yystate11
-	case c >= '0' && c <= '9' || c >= 'A' && c <= 'Z' || c == '_' || c >= 'a' && c <= 'h' || c >= 'j' && c <= 'z':
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'h' || c >= 'j' && c <= 'z':
 		goto yystate7
 	}
 
@@ -153,7 +162,7 @@ yystate11:
 		goto yyrule3
 	case c == 't':
 		goto yystate12
-	case c >= '0' && c <= '9' || c >= 'A' && c <= 'Z' || c == '_' || c >= 'a' && c <= 's' || c >= 'u' && c <= 'z':
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 's' || c >= 'u' && c <= 'z':
 		goto yystate7
 	}
 
@@ -164,7 +173,7 @@ yystate12:
 		goto yyrule3
 	case c == 'y':
 		goto yystate13
-	case c >= '0' && c <= '9' || c >= 'A' && c <= 'Z' || c == '_' || c >= 'a' && c <= 'x' || c == 'z':
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'x' || c == 'z':
 		goto yystate7
 	}
 
@@ -173,11 +182,37 @@ yystate13:
 	switch {
 	default:
 		goto yyrule2
-	case c >= '0' && c <= '9' || c >= 'A' && c <= 'Z' || c == '_' || c >= 'a' && c <= 'z':
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z':
 		goto yystate7
 	}
 
-yyrule1: // [ \t\n\r]+
+yystate14:
+	c = l.Next()
+	switch {
+	default:
+		goto yyrule1
+	case c == '\t' || c == '\n' || c == '\r' || c == ' ':
+		goto yystate5
+	case c == 's':
+		goto yystate15
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'r' || c >= 't' && c <= 'z':
+		goto yystate7
+	}
+
+yystate15:
+	c = l.Next()
+	switch {
+	default:
+		goto yyrule1
+	case c == '\t' || c == '\n' || c == '\r' || c == ' ':
+		goto yystate5
+	case c == 's':
+		goto yystate15
+	case c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'r' || c >= 't' && c <= 'z':
+		goto yystate7
+	}
+
+yyrule1: // [ \s\t\n\r]+
 	{
 		// Ignore whitespace
 		goto yystate0
@@ -185,6 +220,7 @@ yyrule1: // [ \t\n\r]+
 yyrule2: // {E}
 	{
 		{
+			fmt.Printf("buf when E: %s\n", buf.String())
 			return EN_TOK
 		}
 		goto yystate0
