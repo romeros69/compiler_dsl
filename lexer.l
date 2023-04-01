@@ -54,10 +54,24 @@ func (l *Lex) Lex(lval *yySymType) int {
 %yyc c
 %yyn c = l.Next()
 
-S       [a-zA-Z]+
-E       entity
-INT     int
-STRING  string
+IDENT   [a-zA-Z]+
+ENTITY  "entity"
+INT     "int"
+INT8    "int8"
+INT16   "int16"
+INT32   "int32"
+INT64   "int64"
+UINT    "uint"
+UINT8   "uint8"
+UINT16  "uint16"
+UINT32  "uint32"
+UINT64  "uint64"
+BYTE    "byte"
+RUNE    "rune"
+FLOAT32 "float32"
+FLOAT64 "float64"
+BOOL    "bool"
+STRING  "string"
 C       [ \s\t\n\r]+
 LS      "{"
 RS      "}"
@@ -113,7 +127,7 @@ LIST    "list"
 
 {E}                 {l.Backup(); return EN_TOK}
 
-{S}                 {
+{IDENT}             {
 
                         lval.val = buf.String()
                         return IDENT

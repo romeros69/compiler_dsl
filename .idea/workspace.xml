@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="acba03b1-fb70-4ab9-a38e-10809c2cca85" name="Changes" comment="feat: del bin">
+    <list default="true" id="acba03b1-fb70-4ab9-a38e-10809c2cca85" name="Changes" comment="feat: update .gitignore">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input.fekos" beforeDir="false" afterPath="$PROJECT_DIR$/input.fekos" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lexer.go" beforeDir="false" afterPath="$PROJECT_DIR$/lexer.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lexer.l" beforeDir="false" afterPath="$PROJECT_DIR$/lexer.l" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -77,7 +75,8 @@
     <MESSAGE value="feat: update work simple parser" />
     <MESSAGE value="feat: update main &amp; Makefile" />
     <MESSAGE value="feat: del bin" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: del bin" />
+    <MESSAGE value="feat: update .gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: update .gitignore" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
