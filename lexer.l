@@ -61,15 +61,48 @@ STRING  string
 C       [ \s\t\n\r]+
 LS      "{"
 RS      "}"
+ARROW   "->"
+COMMA   [\,]
+CREATE  "create"
+READ    "read"
+UPDATE  "update"
+DELETE  "delete"
+LIST    "list"
 
 %%
     buf.Reset()
 
 {C}                 // continue
 
-{LS}                {return LS}
+{LS}                {return LS_TOK}
 
-{RS}                {return RS}
+{RS}                {return RS_TOK}
+
+{COMMA}             {return COMMA_TOK}
+
+{ARROW}             {return ARROW_TOK}
+
+{CREATE}            {
+                        l.Backup()
+                        return CREATE_TOK
+                    }
+
+{READ}              {
+                        l.Backup()
+                        return READ_TOK
+                    }
+
+{UPDATE}            {
+                        l.Backup()
+                        return UPDATE_TOK
+                    }
+
+{DELETE}            {
+                        l.Backup()
+                        return DELETE_TOK
+                    }
+
+{LIST}              {return LIST_TOK}
 
 {INT}               {return INT_T_TOK}
 
@@ -78,6 +111,7 @@ RS      "}"
 {E}                 {return EN_TOK}
 
 {S}                 {
+
                         lval.val = buf.String()
                         return IDENT
                     }

@@ -1,5 +1,7 @@
 entity roma {
     name string
     age int
-    type string
-}
+    group string
+} -> create, read
+
+

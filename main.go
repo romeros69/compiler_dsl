@@ -32,5 +32,5 @@ func main() {
 
 	l := NewLex(inputBuf)
 	_ = yyParse(l)
-	fmt.Printf("ast: %v\n", l.result)
+	fmt.Printf("ast: %#+v\n", l.result)
 }

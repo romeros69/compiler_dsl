@@ -18,25 +18,25 @@ state 1
 state 2
 	main:  ent.    (1)
 
-	.  reduce 1 (src line 39)
+	.  reduce 1 (src line 43)
 
 
 state 3
-	ent:  EN_TOK.IDENT LS fields RS 
+	ent:  EN_TOK.IDENT LS_TOK fields RS_TOK ARROW_TOK actions 
 
 	IDENT  shift 4
 	.  error
 
 
 state 4
-	ent:  EN_TOK IDENT.LS fields RS 
+	ent:  EN_TOK IDENT.LS_TOK fields RS_TOK ARROW_TOK actions 
 
-	LS  shift 5
+	LS_TOK  shift 5
 	.  error
 
 
 state 5
-	ent:  EN_TOK IDENT LS.fields RS 
+	ent:  EN_TOK IDENT LS_TOK.fields RS_TOK ARROW_TOK actions 
 
 	IDENT  shift 8
 	.  error
@@ -45,11 +45,11 @@ state 5
 	fields  goto 6
 
 state 6
-	ent:  EN_TOK IDENT LS fields.RS 
+	ent:  EN_TOK IDENT LS_TOK fields.RS_TOK ARROW_TOK actions 
 	fields:  fields.field 
 
 	IDENT  shift 8
-	RS  shift 9
+	RS_TOK  shift 9
 	.  error
 
 	field  goto 10
@@ -57,7 +57,7 @@ state 6
 state 7
 	fields:  field.    (3)
 
-	.  reduce 3 (src line 49)
+	.  reduce 3 (src line 57)
 
 
 state 8
@@ -70,44 +70,120 @@ state 8
 	type  goto 11
 
 state 9
-	ent:  EN_TOK IDENT LS fields RS.    (2)
+	ent:  EN_TOK IDENT LS_TOK fields RS_TOK.ARROW_TOK actions 
 
-	.  reduce 2 (src line 44)
+	ARROW_TOK  shift 14
+	.  error
 
 
 state 10
 	fields:  fields field.    (4)
 
-	.  reduce 4 (src line 54)
+	.  reduce 4 (src line 62)
 
 
 state 11
 	field:  IDENT type.    (5)
 
-	.  reduce 5 (src line 59)
+	.  reduce 5 (src line 67)
 
 
 state 12
-	type:  INT_T_TOK.    (6)
+	type:  INT_T_TOK.    (13)
 
-	.  reduce 6 (src line 63)
+	.  reduce 13 (src line 90)
 
 
 state 13
-	type:  STRING_T_TOK.    (7)
+	type:  STRING_T_TOK.    (14)
 
-	.  reduce 7 (src line 65)
+	.  reduce 14 (src line 92)
 
 
-9 terminals, 6 nonterminals
-8 grammar rules, 14/16000 states
+state 14
+	ent:  EN_TOK IDENT LS_TOK fields RS_TOK ARROW_TOK.actions 
+
+	CREATE_TOK  shift 17
+	READ_TOK  shift 18
+	UPDATE_TOK  shift 19
+	DELETE_TOK  shift 20
+	LIST_TOK  shift 21
+	.  error
+
+	actions  goto 15
+	action  goto 16
+
+state 15
+	ent:  EN_TOK IDENT LS_TOK fields RS_TOK ARROW_TOK actions.    (2)
+	actions:  actions.COMMA_TOK action 
+
+	COMMA_TOK  shift 22
+	.  reduce 2 (src line 48)
+
+
+state 16
+	actions:  action.    (6)
+
+	.  reduce 6 (src line 72)
+
+
+state 17
+	action:  CREATE_TOK.    (8)
+
+	.  reduce 8 (src line 82)
+
+
+state 18
+	action:  READ_TOK.    (9)
+
+	.  reduce 9 (src line 84)
+
+
+state 19
+	action:  UPDATE_TOK.    (10)
+
+	.  reduce 10 (src line 85)
+
+
+state 20
+	action:  DELETE_TOK.    (11)
+
+	.  reduce 11 (src line 86)
+
+
+state 21
+	action:  LIST_TOK.    (12)
+
+	.  reduce 12 (src line 87)
+
+
+state 22
+	actions:  actions COMMA_TOK.action 
+
+	CREATE_TOK  shift 17
+	READ_TOK  shift 18
+	UPDATE_TOK  shift 19
+	DELETE_TOK  shift 20
+	LIST_TOK  shift 21
+	.  error
+
+	action  goto 23
+
+state 23
+	actions:  actions COMMA_TOK action.    (7)
+
+	.  reduce 7 (src line 77)
+
+
+16 terminals, 8 nonterminals
+15 grammar rules, 24/16000 states
 0 shift/reduce, 0 reduce/reduce conflicts reported
-55 working sets used
-memory: parser 5/240000
+57 working sets used
+memory: parser 8/240000
 0 extra closures
-8 shift entries, 1 exceptions
-6 goto entries
+20 shift entries, 1 exceptions
+9 goto entries
 0 entries saved by goto default
-Optimizer space used: output 14/240000
-14 table entries, 0 zero
-maximum spread: 9, maximum offset: 8
+Optimizer space used: output 24/240000
+24 table entries, 0 zero
+maximum spread: 16, maximum offset: 22
