@@ -11,7 +11,7 @@ import (
 type Lex struct {
     input []byte
     pos int
-    result ent
+    result AST
     err error
 }
 
@@ -74,13 +74,13 @@ LIST    "list"
 
 {C}                 // continue
 
-{LS}                {return LS_TOK}
+{LS}                {l.Backup(); return LS_TOK}
 
-{RS}                {return RS_TOK}
+{RS}                {l.Backup(); return RS_TOK}
 
-{COMMA}             {return COMMA_TOK}
+{COMMA}             {l.Backup(); return COMMA_TOK}
 
-{ARROW}             {return ARROW_TOK}
+{ARROW}             {l.Backup(); return ARROW_TOK}
 
 {CREATE}            {
                         l.Backup()
@@ -102,13 +102,16 @@ LIST    "list"
                         return DELETE_TOK
                     }
 
-{LIST}              {return LIST_TOK}
+{LIST}              {
+                        l.Backup()
+                        return LIST_TOK
+                    }
 
-{INT}               {return INT_T_TOK}
+{INT}               {l.Backup(); return INT_T_TOK}
 
-{STRING}            {return STRING_T_TOK}
+{STRING}            {l.Backup(); return STRING_T_TOK}
 
-{E}                 {return EN_TOK}
+{E}                 {l.Backup(); return EN_TOK}
 
 {S}                 {
 
@@ -116,7 +119,7 @@ LIST    "list"
                         return IDENT
                     }
 
-\0                  {return -1} // Exit on EOF or any other error
+\0                  {fmt.Printf("ERROR 1 -- {%s}\n", buf.String()); return -1} // Exit on EOF or any other error
 
 .                   {fmt.Printf("ERROR 2: %s, buf: %s\n", string(c), buf); return -1}
 

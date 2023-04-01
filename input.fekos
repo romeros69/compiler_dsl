@@ -1,7 +1,9 @@
 entity roma {
     name string
     age int
-    group string
-} -> create, read
+} -> create, delete
 
-
+entity popa {
+    name string
+    tittle string
+} -> create, list

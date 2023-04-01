@@ -17,9 +17,15 @@ type ent struct {
   actions []string
 }
 
+type AST struct {
+  entities []ent
+}
+
 %}
 
 %union{
+  ast AST
+  entities []ent
   ent ent
   fields []field
   field field
@@ -35,14 +41,31 @@ type ent struct {
 %type  <fields>	 fields
 %type  <actions> actions
 %type  <val>  	 action
+%type  <ast>     ast
+%type  <entities> entities
 
 %start main
 
 %%
 
-main: ent
+main: ast
   {
     yylex.(*Lex).result = $1
+  }
+
+ast: entities
+  {
+    $$ = AST{entities: $1}
+  }
+
+entities:
+  ent
+  {
+    $$ = []ent{$1}
+  }
+| entities ent
+  {
+    $$ = append($1, $2)
   }
 
 ent: EN_TOK IDENT LS_TOK fields RS_TOK ARROW_TOK actions

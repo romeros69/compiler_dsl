@@ -23,15 +23,21 @@ type ent struct {
 	actions []string
 }
 
-//line parser.y:22
+type AST struct {
+	entities []ent
+}
+
+//line parser.y:26
 type yySymType struct {
-	yys     int
-	ent     ent
-	fields  []field
-	field   field
-	val     string
-	tokType int
-	actions []string
+	yys      int
+	ast      AST
+	entities []ent
+	ent      ent
+	fields   []field
+	field    field
+	val      string
+	tokType  int
+	actions  []string
 }
 
 const IDENT = 57346
@@ -82,44 +88,44 @@ var yyExca = [...]int8{
 
 const yyPrivate = 57344
 
-const yyLast = 24
+const yyLast = 27
 
 var yyAct = [...]int8{
-	16, 17, 18, 19, 20, 21, 22, 14, 8, 12,
-	13, 7, 3, 9, 5, 8, 4, 1, 10, 15,
-	6, 11, 2, 23,
+	19, 20, 21, 22, 23, 24, 25, 17, 11, 10,
+	8, 15, 16, 12, 5, 11, 7, 4, 1, 13,
+	3, 6, 2, 18, 9, 14, 26,
 }
 
 var yyPact = [...]int16{
-	7, -1000, -1000, 12, 6, 11, 4, -1000, 3, -3,
-	-1000, -1000, -1000, -1000, -11, -5, -1000, -1000, -1000, -1000,
-	-1000, -1000, -11, -1000,
+	9, -1000, -1000, 9, -1000, 12, -1000, 2, 11, 4,
+	-1000, 5, -3, -1000, -1000, -1000, -1000, -11, -5, -1000,
+	-1000, -1000, -1000, -1000, -1000, -11, -1000,
 }
 
 var yyPgo = [...]int8{
-	0, 22, 11, 21, 20, 19, 0, 17,
+	0, 17, 9, 25, 24, 23, 0, 22, 20, 18,
 }
 
 var yyR1 = [...]int8{
-	0, 7, 1, 4, 4, 2, 5, 5, 6, 6,
-	6, 6, 6, 3, 3,
+	0, 9, 7, 8, 8, 1, 4, 4, 2, 5,
+	5, 6, 6, 6, 6, 6, 3, 3,
 }
 
 var yyR2 = [...]int8{
-	0, 1, 7, 1, 2, 2, 1, 3, 1, 1,
-	1, 1, 1, 1, 1,
+	0, 1, 1, 1, 2, 7, 1, 2, 2, 1,
+	3, 1, 1, 1, 1, 1, 1, 1,
 }
 
 var yyChk = [...]int16{
-	-1000, -7, -1, 5, 4, 8, -4, -2, 4, 9,
-	-2, -3, 6, 7, 10, -5, -6, 12, 13, 14,
-	15, 16, 11, -6,
+	-1000, -9, -7, -8, -1, 5, -1, 4, 8, -4,
+	-2, 4, 9, -2, -3, 6, 7, 10, -5, -6,
+	12, 13, 14, 15, 16, 11, -6,
 }
 
 var yyDef = [...]int8{
-	0, -2, 1, 0, 0, 0, 0, 3, 0, 0,
-	4, 5, 13, 14, 0, 2, 6, 8, 9, 10,
-	11, 12, 0, 7,
+	0, -2, 1, 2, 3, 0, 4, 0, 0, 0,
+	6, 0, 0, 7, 8, 16, 17, 0, 5, 9,
+	11, 12, 13, 14, 15, 0, 10,
 }
 
 var yyTok1 = [...]int8{
@@ -474,13 +480,31 @@ yydefault:
 
 	case 1:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:44
+//line parser.y:52
 		{
-			yylex.(*Lex).result = yyDollar[1].ent
+			yylex.(*Lex).result = yyDollar[1].ast
 		}
 	case 2:
+		yyDollar = yyS[yypt-1 : yypt+1]
+//line parser.y:57
+		{
+			yyVAL.ast = AST{entities: yyDollar[1].entities}
+		}
+	case 3:
+		yyDollar = yyS[yypt-1 : yypt+1]
+//line parser.y:63
+		{
+			yyVAL.entities = []ent{yyDollar[1].ent}
+		}
+	case 4:
+		yyDollar = yyS[yypt-2 : yypt+1]
+//line parser.y:67
+		{
+			yyVAL.entities = append(yyDollar[1].entities, yyDollar[2].ent)
+		}
+	case 5:
 		yyDollar = yyS[yypt-7 : yypt+1]
-//line parser.y:49
+//line parser.y:72
 		{
 			yyVAL.ent = ent{
 				name:    yyDollar[2].val,
@@ -488,75 +512,75 @@ yydefault:
 				actions: yyDollar[7].actions,
 			}
 		}
-	case 3:
+	case 6:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:59
+//line parser.y:82
 		{
 			yyVAL.fields = []field{yyDollar[1].field}
 		}
-	case 4:
+	case 7:
 		yyDollar = yyS[yypt-2 : yypt+1]
-//line parser.y:63
+//line parser.y:86
 		{
 			yyVAL.fields = append(yyDollar[1].fields, yyDollar[2].field)
 		}
-	case 5:
+	case 8:
 		yyDollar = yyS[yypt-2 : yypt+1]
-//line parser.y:68
+//line parser.y:91
 		{
 			yyVAL.field = field{name: yyDollar[1].val, tokType: yyDollar[2].tokType}
 		}
-	case 6:
+	case 9:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:74
+//line parser.y:97
 		{
 			yyVAL.actions = []string{yyDollar[1].val}
 		}
-	case 7:
+	case 10:
 		yyDollar = yyS[yypt-3 : yypt+1]
-//line parser.y:78
+//line parser.y:101
 		{
 			yyVAL.actions = append(yyDollar[1].actions, yyDollar[3].val)
 		}
-	case 8:
+	case 11:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:83
+//line parser.y:106
 		{
 			yyVAL.val = "create"
 		}
-	case 9:
+	case 12:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:84
+//line parser.y:107
 		{
 			yyVAL.val = "read"
 		}
-	case 10:
+	case 13:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:85
+//line parser.y:108
 		{
 			yyVAL.val = "update"
 		}
-	case 11:
+	case 14:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:86
+//line parser.y:109
 		{
 			yyVAL.val = "delete"
 		}
-	case 12:
+	case 15:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:87
+//line parser.y:110
 		{
 			yyVAL.val = "list"
 		}
-	case 13:
+	case 16:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:91
+//line parser.y:114
 		{
 			yyVAL.tokType = INT
 		}
-	case 14:
+	case 17:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:92
+//line parser.y:115
 		{
 			yyVAL.tokType = STRING
 		}

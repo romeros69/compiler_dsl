@@ -12,7 +12,7 @@ import (
 type Lex struct {
 	input  []byte
 	pos    int
-	result ent
+	result AST
 	err    error
 }
 
@@ -626,6 +626,7 @@ yyrule1: // {C}
 yyrule2: // {LS}
 	{
 		{
+			l.Backup()
 			return LS_TOK
 		}
 		goto yystate0
@@ -633,6 +634,7 @@ yyrule2: // {LS}
 yyrule3: // {RS}
 	{
 		{
+			l.Backup()
 			return RS_TOK
 		}
 		goto yystate0
@@ -640,6 +642,7 @@ yyrule3: // {RS}
 yyrule4: // {COMMA}
 	{
 		{
+			l.Backup()
 			return COMMA_TOK
 		}
 		goto yystate0
@@ -647,6 +650,7 @@ yyrule4: // {COMMA}
 yyrule5: // {ARROW}
 	{
 		{
+			l.Backup()
 			return ARROW_TOK
 		}
 		goto yystate0
@@ -686,6 +690,7 @@ yyrule9: // {DELETE}
 yyrule10: // {LIST}
 	{
 		{
+			l.Backup()
 			return LIST_TOK
 		}
 		goto yystate0
@@ -693,6 +698,7 @@ yyrule10: // {LIST}
 yyrule11: // {INT}
 	{
 		{
+			l.Backup()
 			return INT_T_TOK
 		}
 		goto yystate0
@@ -700,6 +706,7 @@ yyrule11: // {INT}
 yyrule12: // {STRING}
 	{
 		{
+			l.Backup()
 			return STRING_T_TOK
 		}
 		goto yystate0
@@ -707,6 +714,7 @@ yyrule12: // {STRING}
 yyrule13: // {E}
 	{
 		{
+			l.Backup()
 			return EN_TOK
 		}
 		goto yystate0
@@ -722,6 +730,7 @@ yyrule14: // {S}
 yyrule15: // \0
 	{
 		{
+			fmt.Printf("ERROR 1 -- {%s}\n", buf.String())
 			return -1
 		} // Exit on EOF or any other error
 		goto yystate0

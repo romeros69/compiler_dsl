@@ -9,10 +9,6 @@
       <change beforePath="$PROJECT_DIR$/input.fekos" beforeDir="false" afterPath="$PROJECT_DIR$/input.fekos" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lexer.go" beforeDir="false" afterPath="$PROJECT_DIR$/lexer.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lexer.l" beforeDir="false" afterPath="$PROJECT_DIR$/lexer.l" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parser.go" beforeDir="false" afterPath="$PROJECT_DIR$/parser.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parser.y" beforeDir="false" afterPath="$PROJECT_DIR$/parser.y" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/y.output" beforeDir="false" afterPath="$PROJECT_DIR$/y.output" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

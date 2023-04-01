@@ -2,10 +2,12 @@
 state 0
 	$accept: .main $end 
 
-	EN_TOK  shift 3
+	EN_TOK  shift 5
 	.  error
 
-	ent  goto 2
+	ent  goto 4
+	ast  goto 2
+	entities  goto 3
 	main  goto 1
 
 state 1
@@ -16,174 +18,195 @@ state 1
 
 
 state 2
-	main:  ent.    (1)
+	main:  ast.    (1)
 
-	.  reduce 1 (src line 43)
+	.  reduce 1 (src line 51)
 
 
 state 3
-	ent:  EN_TOK.IDENT LS_TOK fields RS_TOK ARROW_TOK actions 
+	ast:  entities.    (2)
+	entities:  entities.ent 
 
-	IDENT  shift 4
-	.  error
+	EN_TOK  shift 5
+	.  reduce 2 (src line 56)
 
+	ent  goto 6
 
 state 4
-	ent:  EN_TOK IDENT.LS_TOK fields RS_TOK ARROW_TOK actions 
+	entities:  ent.    (3)
 
-	LS_TOK  shift 5
-	.  error
+	.  reduce 3 (src line 61)
 
 
 state 5
-	ent:  EN_TOK IDENT LS_TOK.fields RS_TOK ARROW_TOK actions 
+	ent:  EN_TOK.IDENT LS_TOK fields RS_TOK ARROW_TOK actions 
 
-	IDENT  shift 8
+	IDENT  shift 7
 	.  error
 
-	field  goto 7
-	fields  goto 6
 
 state 6
-	ent:  EN_TOK IDENT LS_TOK fields.RS_TOK ARROW_TOK actions 
-	fields:  fields.field 
+	entities:  entities ent.    (4)
 
-	IDENT  shift 8
-	RS_TOK  shift 9
-	.  error
+	.  reduce 4 (src line 66)
 
-	field  goto 10
 
 state 7
-	fields:  field.    (3)
+	ent:  EN_TOK IDENT.LS_TOK fields RS_TOK ARROW_TOK actions 
 
-	.  reduce 3 (src line 57)
+	LS_TOK  shift 8
+	.  error
 
 
 state 8
-	field:  IDENT.type 
+	ent:  EN_TOK IDENT LS_TOK.fields RS_TOK ARROW_TOK actions 
 
-	INT_T_TOK  shift 12
-	STRING_T_TOK  shift 13
+	IDENT  shift 11
 	.  error
 
-	type  goto 11
+	field  goto 10
+	fields  goto 9
 
 state 9
-	ent:  EN_TOK IDENT LS_TOK fields RS_TOK.ARROW_TOK actions 
+	ent:  EN_TOK IDENT LS_TOK fields.RS_TOK ARROW_TOK actions 
+	fields:  fields.field 
 
-	ARROW_TOK  shift 14
+	IDENT  shift 11
+	RS_TOK  shift 12
 	.  error
 
+	field  goto 13
 
 state 10
-	fields:  fields field.    (4)
+	fields:  field.    (6)
 
-	.  reduce 4 (src line 62)
+	.  reduce 6 (src line 80)
 
 
 state 11
-	field:  IDENT type.    (5)
+	field:  IDENT.type 
 
-	.  reduce 5 (src line 67)
+	INT_T_TOK  shift 15
+	STRING_T_TOK  shift 16
+	.  error
 
+	type  goto 14
 
 state 12
-	type:  INT_T_TOK.    (13)
+	ent:  EN_TOK IDENT LS_TOK fields RS_TOK.ARROW_TOK actions 
 
-	.  reduce 13 (src line 90)
+	ARROW_TOK  shift 17
+	.  error
 
 
 state 13
-	type:  STRING_T_TOK.    (14)
+	fields:  fields field.    (7)
 
-	.  reduce 14 (src line 92)
+	.  reduce 7 (src line 85)
 
 
 state 14
-	ent:  EN_TOK IDENT LS_TOK fields RS_TOK ARROW_TOK.actions 
+	field:  IDENT type.    (8)
 
-	CREATE_TOK  shift 17
-	READ_TOK  shift 18
-	UPDATE_TOK  shift 19
-	DELETE_TOK  shift 20
-	LIST_TOK  shift 21
-	.  error
+	.  reduce 8 (src line 90)
 
-	actions  goto 15
-	action  goto 16
 
 state 15
-	ent:  EN_TOK IDENT LS_TOK fields RS_TOK ARROW_TOK actions.    (2)
-	actions:  actions.COMMA_TOK action 
+	type:  INT_T_TOK.    (16)
 
-	COMMA_TOK  shift 22
-	.  reduce 2 (src line 48)
+	.  reduce 16 (src line 113)
 
 
 state 16
-	actions:  action.    (6)
+	type:  STRING_T_TOK.    (17)
 
-	.  reduce 6 (src line 72)
+	.  reduce 17 (src line 115)
 
 
 state 17
-	action:  CREATE_TOK.    (8)
+	ent:  EN_TOK IDENT LS_TOK fields RS_TOK ARROW_TOK.actions 
 
-	.  reduce 8 (src line 82)
+	CREATE_TOK  shift 20
+	READ_TOK  shift 21
+	UPDATE_TOK  shift 22
+	DELETE_TOK  shift 23
+	LIST_TOK  shift 24
+	.  error
 
+	actions  goto 18
+	action  goto 19
 
 state 18
-	action:  READ_TOK.    (9)
+	ent:  EN_TOK IDENT LS_TOK fields RS_TOK ARROW_TOK actions.    (5)
+	actions:  actions.COMMA_TOK action 
 
-	.  reduce 9 (src line 84)
+	COMMA_TOK  shift 25
+	.  reduce 5 (src line 71)
 
 
 state 19
-	action:  UPDATE_TOK.    (10)
+	actions:  action.    (9)
 
-	.  reduce 10 (src line 85)
+	.  reduce 9 (src line 95)
 
 
 state 20
-	action:  DELETE_TOK.    (11)
+	action:  CREATE_TOK.    (11)
 
-	.  reduce 11 (src line 86)
+	.  reduce 11 (src line 105)
 
 
 state 21
-	action:  LIST_TOK.    (12)
+	action:  READ_TOK.    (12)
 
-	.  reduce 12 (src line 87)
+	.  reduce 12 (src line 107)
 
 
 state 22
-	actions:  actions COMMA_TOK.action 
+	action:  UPDATE_TOK.    (13)
 
-	CREATE_TOK  shift 17
-	READ_TOK  shift 18
-	UPDATE_TOK  shift 19
-	DELETE_TOK  shift 20
-	LIST_TOK  shift 21
-	.  error
+	.  reduce 13 (src line 108)
 
-	action  goto 23
 
 state 23
-	actions:  actions COMMA_TOK action.    (7)
+	action:  DELETE_TOK.    (14)
 
-	.  reduce 7 (src line 77)
+	.  reduce 14 (src line 109)
 
 
-16 terminals, 8 nonterminals
-15 grammar rules, 24/16000 states
+state 24
+	action:  LIST_TOK.    (15)
+
+	.  reduce 15 (src line 110)
+
+
+state 25
+	actions:  actions COMMA_TOK.action 
+
+	CREATE_TOK  shift 20
+	READ_TOK  shift 21
+	UPDATE_TOK  shift 22
+	DELETE_TOK  shift 23
+	LIST_TOK  shift 24
+	.  error
+
+	action  goto 26
+
+state 26
+	actions:  actions COMMA_TOK action.    (10)
+
+	.  reduce 10 (src line 100)
+
+
+16 terminals, 10 nonterminals
+18 grammar rules, 27/16000 states
 0 shift/reduce, 0 reduce/reduce conflicts reported
-57 working sets used
-memory: parser 8/240000
+59 working sets used
+memory: parser 11/240000
 0 extra closures
-20 shift entries, 1 exceptions
-9 goto entries
+21 shift entries, 1 exceptions
+12 goto entries
 0 entries saved by goto default
-Optimizer space used: output 24/240000
-24 table entries, 0 zero
-maximum spread: 16, maximum offset: 22
+Optimizer space used: output 27/240000
+27 table entries, 0 zero
+maximum spread: 16, maximum offset: 25
