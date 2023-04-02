@@ -77,9 +77,9 @@ UPDATE      "update"
 DELETE      "delete"
 LIST        "list"
 IDENT       [a-zA-Z]+
-C           [ \s\t\n\r]+
-LS          "{"
-RS          "}"
+C           [ \t\n\r]+
+LS          [{]
+RS          [}]
 ARROW       "->"
 COMMA       [\,]
 
@@ -219,6 +219,7 @@ COMMA       [\,]
                     }
 
 {IDENT}             {
+                        l.Backup()
                         lval.val = buf.String()
                         return IDENT
                     }

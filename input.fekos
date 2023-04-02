@@ -3,8 +3,7 @@ entity roma {
     age float32
 } -> create, delete
 
-entity popa {
-    name string
-    tittle string
-    cut int16
-} -> create, list
+entity Sanek {
+    lolus int32
+    kekus bool
+} -> create, update, delete, list
