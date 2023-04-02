@@ -144,7 +144,7 @@ var yyAct = [...]int8{
 	15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
 	25, 26, 27, 28, 29, 30, 33, 34, 35, 36,
 	37, 38, 10, 39, 31, 11, 8, 5, 12, 11,
-	7, 4, 13, 1, 3, 6, 2, 32, 9, 14,
+	7, 4, 13, 1, 14, 6, 32, 9, 3, 2,
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 	0, 0, 0, 0, 0, 0, 40,
 }
@@ -158,14 +158,14 @@ var yyPact = [...]int16{
 }
 
 var yyPgo = [...]int8{
-	0, 31, 22, 39, 38, 37, 16, 36, 34, 33,
+	0, 39, 38, 37, 36, 31, 22, 16, 34, 33,
 }
 
 var yyR1 = [...]int8{
-	0, 9, 7, 8, 8, 1, 4, 4, 2, 5,
-	5, 6, 6, 6, 6, 6, 3, 3, 3, 3,
-	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-	3, 3,
+	0, 9, 1, 2, 2, 5, 3, 3, 6, 4,
+	4, 7, 7, 7, 7, 7, 8, 8, 8, 8,
+	8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
+	8, 8,
 }
 
 var yyR2 = [...]int8{
@@ -176,11 +176,11 @@ var yyR2 = [...]int8{
 }
 
 var yyChk = [...]int16{
-	-1000, -9, -7, -8, -1, 5, -1, 4, 6, -4,
-	-2, 4, 7, -2, -3, 15, 16, 17, 18, 19,
+	-1000, -9, -1, -2, -5, 5, -5, 4, 6, -3,
+	-6, 4, 7, -6, -8, 15, 16, 17, 18, 19,
 	20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
-	30, 8, -5, -6, 10, 11, 12, 13, 14, 9,
-	-6,
+	30, 8, -4, -7, 10, 11, 12, 13, 14, 9,
+	-7,
 }
 
 var yyDef = [...]int8{
@@ -608,127 +608,127 @@ yydefault:
 		}
 	case 11:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:145
+//line parser.y:146
 		{
 			yyVAL.val = CREATE
 		}
 	case 12:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:146
+//line parser.y:150
 		{
 			yyVAL.val = READ
 		}
 	case 13:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:147
+//line parser.y:154
 		{
 			yyVAL.val = UPDATE
 		}
 	case 14:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:148
+//line parser.y:158
 		{
 			yyVAL.val = DELETE
 		}
 	case 15:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:149
+//line parser.y:162
 		{
 			yyVAL.val = LIST
 		}
 	case 16:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:153
+//line parser.y:169
 		{
 			yyVAL.tokType = INT
 		}
 	case 17:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:154
+//line parser.y:173
 		{
 			yyVAL.tokType = INT8
 		}
 	case 18:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:155
+//line parser.y:177
 		{
 			yyVAL.tokType = INT16
 		}
 	case 19:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:156
+//line parser.y:181
 		{
 			yyVAL.tokType = INT32
 		}
 	case 20:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:157
+//line parser.y:185
 		{
 			yyVAL.tokType = INT64
 		}
 	case 21:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:158
+//line parser.y:189
 		{
 			yyVAL.tokType = UINT
 		}
 	case 22:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:159
+//line parser.y:193
 		{
 			yyVAL.tokType = UINT8
 		}
 	case 23:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:160
+//line parser.y:197
 		{
 			yyVAL.tokType = UINT16
 		}
 	case 24:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:161
+//line parser.y:201
 		{
 			yyVAL.tokType = UINT32
 		}
 	case 25:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:162
+//line parser.y:205
 		{
 			yyVAL.tokType = UINT64
 		}
 	case 26:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:163
+//line parser.y:209
 		{
 			yyVAL.tokType = BYTE
 		}
 	case 27:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:164
+//line parser.y:213
 		{
 			yyVAL.tokType = RUNE
 		}
 	case 28:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:165
+//line parser.y:217
 		{
 			yyVAL.tokType = FLOAT32
 		}
 	case 29:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:166
+//line parser.y:221
 		{
 			yyVAL.tokType = FLOAT64
 		}
 	case 30:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:167
+//line parser.y:225
 		{
 			yyVAL.tokType = BOOL
 		}
 	case 31:
 		yyDollar = yyS[yypt-1 : yypt+1]
-//line parser.y:168
+//line parser.y:229
 		{
 			yyVAL.tokType = STRING
 		}

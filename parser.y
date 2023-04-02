@@ -74,14 +74,14 @@ type AST struct {
 %token <val>		BOOL_T
 %token <val>		STRING_T
 
-%type  <ent>     ent
-%type  <field>   field
-%type  <tokType> type
-%type  <fields>	 fields
-%type  <actions> actions
-%type  <val>  	 action
-%type  <ast>     ast
-%type  <entities> entities
+%type  <ast>     	ast
+%type  <entities> 	entities
+%type  <fields>	 	fields
+%type  <actions> 	actions
+%type  <ent>     	ent
+%type  <field>   	field
+%type  <val>  	 	action
+%type  <tokType> 	type
 
 %start main
 
@@ -142,27 +142,90 @@ actions:
   }
 
 action:
-  CREATE_TOK 	{$$ = CREATE}
-| READ_TOK 	{$$ = READ}
-| UPDATE_TOK 	{$$ = UPDATE}
-| DELETE_TOK 	{$$ = DELETE}
-| LIST_TOK 	{$$ = LIST}
+  CREATE_TOK
+  {
+    $$ = CREATE
+  }
+| READ_TOK
+  {
+    $$ = READ
+  }
+| UPDATE_TOK
+  {
+    $$ = UPDATE
+  }
+| DELETE_TOK
+  {
+    $$ = DELETE
+  }
+| LIST_TOK
+  {
+    $$ = LIST
+  }
 
 
 type:
-  INT_T 	{$$ = INT}
-| INT8_T	{$$ = INT8}
-| INT16_T	{$$ = INT16}
-| INT32_T	{$$ = INT32}
-| INT64_T	{$$ = INT64}
-| UINT_T	{$$ = UINT}
-| UINT8_T	{$$ = UINT8}
-| UINT16_T	{$$ = UINT16}
-| UINT32_T	{$$ = UINT32}
-| UINT64_T	{$$ = UINT64}
-| BYTE_T	{$$ = BYTE}
-| RUNE_T	{$$ = RUNE}
-| FLOAT32_T	{$$ = FLOAT32}
-| FLOAT64_T	{$$ = FLOAT64}
-| BOOL_T	{$$ = BOOL}
-| STRING_T 	{$$ = STRING}
+  INT_T
+  {
+    $$ = INT
+  }
+| INT8_T
+  {
+    $$ = INT8
+  }
+| INT16_T
+  {
+    $$ = INT16
+  }
+| INT32_T
+  {
+    $$ = INT32
+  }
+| INT64_T
+  {
+    $$ = INT64
+  }
+| UINT_T
+  {
+    $$ = UINT
+  }
+| UINT8_T
+  {
+    $$ = UINT8
+  }
+| UINT16_T
+  {
+    $$ = UINT16
+  }
+| UINT32_T
+  {
+    $$ = UINT32
+  }
+| UINT64_T
+  {
+    $$ = UINT64
+  }
+| BYTE_T
+  {
+    $$ = BYTE
+  }
+| RUNE_T
+  {
+    $$ = RUNE
+  }
+| FLOAT32_T
+  {
+    $$ = FLOAT32
+  }
+| FLOAT64_T
+  {
+    $$ = FLOAT64
+  }
+| BOOL_T
+  {
+    $$ = BOOL
+  }
+| STRING_T
+  {
+    $$ = STRING
+  }

@@ -1,9 +1,10 @@
 entity roma {
     name string
-    age int
+    age float32
 } -> create, delete
 
 entity popa {
     name string
     tittle string
+    cut int16
 } -> create, list

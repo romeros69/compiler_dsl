@@ -5,9 +5,9 @@ state 0
 	EN_TOK  shift 5
 	.  error
 
-	ent  goto 4
 	ast  goto 2
 	entities  goto 3
+	ent  goto 4
 	main  goto 1
 
 state 1
@@ -64,8 +64,8 @@ state 8
 	IDENT  shift 11
 	.  error
 
-	field  goto 10
 	fields  goto 9
+	field  goto 10
 
 state 9
 	ent:  EN_TOK IDENT LS_TOK fields.RS_TOK ARROW_TOK actions 
@@ -128,97 +128,97 @@ state 14
 state 15
 	type:  INT_T.    (16)
 
-	.  reduce 16 (src line 152)
+	.  reduce 16 (src line 167)
 
 
 state 16
 	type:  INT8_T.    (17)
 
-	.  reduce 17 (src line 154)
+	.  reduce 17 (src line 172)
 
 
 state 17
 	type:  INT16_T.    (18)
 
-	.  reduce 18 (src line 155)
+	.  reduce 18 (src line 176)
 
 
 state 18
 	type:  INT32_T.    (19)
 
-	.  reduce 19 (src line 156)
+	.  reduce 19 (src line 180)
 
 
 state 19
 	type:  INT64_T.    (20)
 
-	.  reduce 20 (src line 157)
+	.  reduce 20 (src line 184)
 
 
 state 20
 	type:  UINT_T.    (21)
 
-	.  reduce 21 (src line 158)
+	.  reduce 21 (src line 188)
 
 
 state 21
 	type:  UINT8_T.    (22)
 
-	.  reduce 22 (src line 159)
+	.  reduce 22 (src line 192)
 
 
 state 22
 	type:  UINT16_T.    (23)
 
-	.  reduce 23 (src line 160)
+	.  reduce 23 (src line 196)
 
 
 state 23
 	type:  UINT32_T.    (24)
 
-	.  reduce 24 (src line 161)
+	.  reduce 24 (src line 200)
 
 
 state 24
 	type:  UINT64_T.    (25)
 
-	.  reduce 25 (src line 162)
+	.  reduce 25 (src line 204)
 
 
 state 25
 	type:  BYTE_T.    (26)
 
-	.  reduce 26 (src line 163)
+	.  reduce 26 (src line 208)
 
 
 state 26
 	type:  RUNE_T.    (27)
 
-	.  reduce 27 (src line 164)
+	.  reduce 27 (src line 212)
 
 
 state 27
 	type:  FLOAT32_T.    (28)
 
-	.  reduce 28 (src line 165)
+	.  reduce 28 (src line 216)
 
 
 state 28
 	type:  FLOAT64_T.    (29)
 
-	.  reduce 29 (src line 166)
+	.  reduce 29 (src line 220)
 
 
 state 29
 	type:  BOOL_T.    (30)
 
-	.  reduce 30 (src line 167)
+	.  reduce 30 (src line 224)
 
 
 state 30
 	type:  STRING_T.    (31)
 
-	.  reduce 31 (src line 168)
+	.  reduce 31 (src line 228)
 
 
 state 31
@@ -257,25 +257,25 @@ state 34
 state 35
 	action:  READ_TOK.    (12)
 
-	.  reduce 12 (src line 146)
+	.  reduce 12 (src line 149)
 
 
 state 36
 	action:  UPDATE_TOK.    (13)
 
-	.  reduce 13 (src line 147)
+	.  reduce 13 (src line 153)
 
 
 state 37
 	action:  DELETE_TOK.    (14)
 
-	.  reduce 14 (src line 148)
+	.  reduce 14 (src line 157)
 
 
 state 38
 	action:  LIST_TOK.    (15)
 
-	.  reduce 15 (src line 149)
+	.  reduce 15 (src line 161)
 
 
 state 39
@@ -300,7 +300,7 @@ state 40
 32 grammar rules, 41/16000 states
 0 shift/reduce, 0 reduce/reduce conflicts reported
 59 working sets used
-memory: parser 11/240000
+memory: parser 12/240000
 0 extra closures
 35 shift entries, 1 exceptions
 12 goto entries
