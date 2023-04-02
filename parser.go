@@ -610,31 +610,31 @@ yydefault:
 		yyDollar = yyS[yypt-1 : yypt+1]
 //line parser.y:145
 		{
-			yyVAL.val = "create"
+			yyVAL.val = CREATE
 		}
 	case 12:
 		yyDollar = yyS[yypt-1 : yypt+1]
 //line parser.y:146
 		{
-			yyVAL.val = "read"
+			yyVAL.val = READ
 		}
 	case 13:
 		yyDollar = yyS[yypt-1 : yypt+1]
 //line parser.y:147
 		{
-			yyVAL.val = "update"
+			yyVAL.val = UPDATE
 		}
 	case 14:
 		yyDollar = yyS[yypt-1 : yypt+1]
 //line parser.y:148
 		{
-			yyVAL.val = "delete"
+			yyVAL.val = DELETE
 		}
 	case 15:
 		yyDollar = yyS[yypt-1 : yypt+1]
 //line parser.y:149
 		{
-			yyVAL.val = "list"
+			yyVAL.val = LIST
 		}
 	case 16:
 		yyDollar = yyS[yypt-1 : yypt+1]

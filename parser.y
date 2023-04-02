@@ -142,11 +142,11 @@ actions:
   }
 
 action:
-  CREATE_TOK 	{$$ = "create"}
-| READ_TOK 	{$$ = "read"}
-| UPDATE_TOK 	{$$ = "update"}
-| DELETE_TOK 	{$$ = "delete"}
-| LIST_TOK 	{$$ = "list"}
+  CREATE_TOK 	{$$ = CREATE}
+| READ_TOK 	{$$ = READ}
+| UPDATE_TOK 	{$$ = UPDATE}
+| DELETE_TOK 	{$$ = DELETE}
+| LIST_TOK 	{$$ = LIST}
 
 
 type:
