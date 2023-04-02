@@ -56,22 +56,22 @@ func (l *Lex) Lex(lval *yySymType) int {
 
 IDENT   [a-zA-Z]+
 ENTITY  "entity"
-INT     "int"
-INT8    "int8"
-INT16   "int16"
-INT32   "int32"
-INT64   "int64"
-UINT    "uint"
-UINT8   "uint8"
-UINT16  "uint16"
-UINT32  "uint32"
-UINT64  "uint64"
-BYTE    "byte"
-RUNE    "rune"
-FLOAT32 "float32"
-FLOAT64 "float64"
-BOOL    "bool"
-STRING  "string"
+INT_T     "int"
+INT8_T    "int8"
+INT16_T   "int16"
+INT32_T   "int32"
+INT64_T   "int64"
+UINT_T    "uint"
+UINT8_T   "uint8"
+UINT16_T  "uint16"
+UINT32_T  "uint32"
+UINT64_T  "uint64"
+BYTE_T    "byte"
+RUNE_T    "rune"
+FLOAT32_T "float32"
+FLOAT64_T "float64"
+BOOL_T    "bool"
+STRING_T  "string"
 C       [ \s\t\n\r]+
 LS      "{"
 RS      "}"
@@ -121,11 +121,39 @@ LIST    "list"
                         return LIST_TOK
                     }
 
-{INT}               {l.Backup(); return INT_T_TOK}
+{INT_T}               {l.Backup(); return INT_T}
 
-{STRING}            {l.Backup(); return STRING_T_TOK}
+{INT8_T}              {l.Backup(); return INT8_T}
 
-{E}                 {l.Backup(); return EN_TOK}
+{INT16_T}             {l.Backup(); return INT16_T}
+
+{INT32_T}            {l.Backup(); return INT32_T}
+
+{INT64_T}             {l.Backup(); return INT64_T}
+
+{UINT_T}              {l.Backup(); return UINT_T}
+
+{UINT8_T}             {l.Backup(); return UINT8_T}
+
+{UINT16_T}            {l.Backup(); return UINT16_T}
+
+{UINT32_T}            {l.Backup(); return UINT32_T}
+
+{UINT64_T}            {l.Backup(); return UINT64_T}
+
+{BYTE_T}              {l.Backup(); return BYTE_T}
+
+{RUNE_T}              {l.Backup(); return RUNE_T}
+
+{FLOAT32_T}           {l.Backup(); return FLOAT32_T}
+
+{FLOAT64_T}           {l.Backup(); return FLOAT64_T}
+
+{BOOL_T}              {l.Backup(); return BOOL_T}
+
+{STRING_T}            {l.Backup(); return STRING_T}
+
+{ENTITY}                 {l.Backup(); return EN_TOK}
 
 {IDENT}             {
 
