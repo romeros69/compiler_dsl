@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="acba03b1-fb70-4ab9-a38e-10809c2cca85" name="Changes" comment="feat: update .gitignore">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input.fekos" beforeDir="false" afterPath="$PROJECT_DIR$/input.fekos" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lexer.go" beforeDir="false" afterPath="$PROJECT_DIR$/lexer.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lexer.l" beforeDir="false" afterPath="$PROJECT_DIR$/lexer.l" afterDir="false" />
     </list>
@@ -111,7 +110,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/lexer.go</url>
-          <line>80</line>
+          <line>77</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

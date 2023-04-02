@@ -37,6 +37,7 @@ func (l *Lex) Next() byte {
 }
 
 func (l *Lex) Error(s string) {
+    fmt.Println(s)
     l.err = errors.New(s)
 }
 
@@ -225,8 +226,7 @@ COMMA       [\,]
                     }
 
 \0                  {
-                        fmt.Printf("ERROR 1 -- {%s}\n", buf.String())
-                        return -1
+                        return 0
                     } // Exit on EOF or any other error
 
 .                   {
